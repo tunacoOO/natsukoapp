@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+
 use App\Models\Category;
 use App\Models\TimeCategory;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Session;
+
 
 class PostController extends Controller
 {
@@ -50,6 +52,7 @@ class PostController extends Controller
     
     public function search(PostRequest $request,Category $category)
     {
+
         return view('post.show')->with(['categories' => $category->get()]);
         $category_id = $request->input('category');
         
@@ -59,6 +62,7 @@ class PostController extends Controller
             $post = Post::where('category_id',$category_id)->get();
         }
        
+
     }
     
     

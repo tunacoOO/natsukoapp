@@ -50,3 +50,4 @@ Route::get('language/{locale}', function ($locale) {
 
     return redirect()->back();
 });
+
