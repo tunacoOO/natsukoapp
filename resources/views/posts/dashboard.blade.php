@@ -10,9 +10,10 @@
     <body>
         <x-app-layout>
             <form action="{{route('posts.all')}}" style="margin-top: 1rem;">
-               <select type="text" class="form-control" name="post[prefecture]">
-                        @foreach(config('pref') as $key => $prefecture )
-                            <option value="{{ $key }}">{{ $prefecture }}</option>
+               <select type="text" class="form-control" name="pref_id">
+                        @foreach($prefs as $index => $name)
+                             <option value="" hidden>都道府県▼</option>
+                             <option value="{{ $index }}">{{ $name }}</option>
                         @endforeach
                     </select>
                
@@ -34,7 +35,6 @@
                 <button>検索</button>
             </form>
 
-            <a href="{{route('posts.all')}}">投稿一覧</a>
              
              <secion class="rsttop-othersearch__main">
                  <div class="rsttop-search__heading">

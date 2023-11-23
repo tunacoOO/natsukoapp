@@ -9,29 +9,30 @@
     </head>
     <body>
         <x-app-layout>
-            <h1 class="title">編集画面</h1>
+             <x-slot name="header">
+        　編集画面
+   　　　　 </x-slot
             <div class="content">
                 <form action="/posts/{{ $post->id }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class='post_images'>
-                        <h2>写真</h2>
                          <input type="file" name="post[images]" value="{{ old('post.images') }}" />
-                         <img src="{{ asset(session('img_path')) }}" alt="">
+                         <img src="{{asset(session('img_path'))}}" alt="">
                     </div>
                     <div class="post_title">
                          <input type="text" name="post[title]" value="{{ $post->title }}">
                     </div>
                     <div class='post_body'>
                         <h2>本文</h2>
-                        <input type='text' name='post[body]' value="{{ $post->body }}">
+                        <textarea name="post[body]">{{ $post->body }}</textarea>
                     </div>
                     <div class="category">
                     <h2>Category</h2>
-                    <select type="text" class="form-control" name="post[prefecture]">
-                        @foreach(config('pref') as $key => $prefecture )
-                            <option value="{{ $key }}">{{ $prefecture }}</option>
-                        @endforeach
+                    <select type="text" class="form-control" name="pref_id" id='pref_id'>
+                          @foreach($prefs as $id => $name)
+                             <option value="{{ $id }}" {{ old('pref_id') == $id? 'selected' : '' }}>{{ $name }}</option>
+                          @endforeach
                     </select>
                     <select name="post[category_id]">
                         @foreach($categories as $category)
@@ -44,8 +45,11 @@
                         @endforeach
                     </select>
                 </div>
-                    <input type="submit" value="保存">
+                   <input type="submit" value="保存">
                 </form>
+                 <div class="fotter">
+                <a href="/">back</a>
+            </div>
             </div>
         </x-app-layout>
     </body>
