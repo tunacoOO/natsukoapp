@@ -35,7 +35,7 @@ Route::get('/', [PostController::class, 'dashboard'])->name('dashboard')->middle
 Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
 Route::post('/posts', [PostController::class, 'store']);
 Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
-Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update');
+Route::put('/posts/{post?}',[PostController::class,'update'])->name('posts.update');
 Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
 Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
 Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
@@ -43,6 +43,8 @@ Route::get('/search',[ArticleController::class,'search'])->name('articles.search
 Route::get('/posts/{post?}',[PostController::class,'all'])->name('posts.all');
 Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');
 Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');
+Route::post('/posts/{post}/like',[PostController::class,'like'])->name('posts.like');
+Route::delete('/posts/{post}/like',[PostController::class,'unlike'])->name('posts.unlike');
 // Language Switcher Route 言語切替用ルートだよ
 Route::get('language/{locale}', function ($locale) {
     app()->setLocale($locale);

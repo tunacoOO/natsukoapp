@@ -10,11 +10,13 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillable = [
+    'title',
     'image',
     'body',
     'category_id',
     'time_category_id',
-    'prefecture'
+    'pref_id',
+    'user_id'
 ];
 
     public function category()
@@ -36,6 +38,11 @@ class Post extends Model
       {
           return config('pref.'.$this->pref_id);
       }
+      
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
 
 
