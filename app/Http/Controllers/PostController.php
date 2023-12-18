@@ -91,10 +91,11 @@ class PostController extends Controller
         $images = $request->file('images');
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
-        $post->fill($input)->save();
         $file = $request->file('post.images');
-        $file_path = $file->store('public');
-        Session::put('img_path', str_replace('public', 'storage', $file_path));
+        $filename = $file->getClientOriginalName();
+        $path = $file->storeAs('public/images',$filename);
+        $post->image = $filename;
+         $post->fill($input)->save();
         return redirect('/posts/'.$post->id);
     }
     
@@ -117,15 +118,17 @@ class PostController extends Controller
         $post->fill($input_post)->save();
          $post->pref_id  = $request->input('pref_id');
         $file = $request->file('post.images');
-        $file_path = $file->store('public');
-        Session::put('img_path', str_replace('public', 'storage', $file_path));
+        $filename = $file->getClientOriginalName();
+        $path = $file->storeAs('public/images',$filename);
+        $post->image = $filename;
+         $post->fill($input_post)->save();
         return redirect('/posts/' . $post->id);
     }
     
     public function delete(Post $post)
         {
             $post->delete();
-            return redirect('/posts/' . $post->id);
+            return redirect('/posts/');
         }
         
     public function like(Post $post)
@@ -139,5 +142,6 @@ class PostController extends Controller
         $post->likes()->where('user_id',auth()->id())->delete();
         return back();
     }
-
+    
+    
 }

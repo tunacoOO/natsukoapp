@@ -1,15 +1,16 @@
 @charset"UTF-8";
 
+
+
 .rsttop-search__title{
     padding: 50px 0px;
     font-size: 30px;
+    font-family: 'M PLUS 1', sans-serif;
+
 }
 
 
-.rsttop-area-search__items{
-    display: inline-block;
-    
-}
+
 
 .rsttop-area-search__item img{
     width: 15%;
