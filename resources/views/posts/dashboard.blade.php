@@ -6,6 +6,10 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
         <link rel="stylesheet" href="{{ asset('./css/dashboard.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     </head>
     <body>
         <x-app-layout>
@@ -32,13 +36,15 @@
                 </select>
                 
                 <input type="text" name="body" placeholder="キーワード">
-                <button>検索</button>
+               <button> <span class="material-symbols-outlined">
+                    search
+                </span></button>
             </form>
 
              
              <secion class="rsttop-othersearch__main">
                  <div class="rsttop-search__heading">
-                     <h2 class="rsttop-search__title">〚料理カテゴリーから探す〛</h2>
+                     <h2 class="rsttop-search__title">🍴料理🍴</h2>
                  
                          
                  <div>
@@ -55,7 +61,7 @@
              
              <section class="rsttop-servicesearch__main">
                  <div class="rsttop-search__heading">
-                     <h2 class="rsttop-search__title">〚状況から探す〛</h2>
+                     <h2 class="rsttop-search__title">🌞状況🌜</h2>
                  </div>
                  <div>
                     @foreach($time_categories as $time_category)

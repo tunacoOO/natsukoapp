@@ -45,6 +45,7 @@ Route::get('/categories/{category}',[CategoryController::class,'show'])->name('c
 Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');
 Route::post('/posts/{post}/like',[PostController::class,'like'])->name('posts.like');
 Route::delete('/posts/{post}/like',[PostController::class,'unlike'])->name('posts.unlike');
+Route::get('/posts/{post}/mine',[ProfileController::class,'show'])->name('profile.mine');
 // Language Switcher Route 言語切替用ルートだよ
 Route::get('language/{locale}', function ($locale) {
     app()->setLocale($locale);

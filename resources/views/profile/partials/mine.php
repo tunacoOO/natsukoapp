@@ -6,19 +6,17 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <link rel="stylesheet" href="./css/show.css">
+        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     </head>
     <body>
         <x-app-layout>
-           <h1 style="padding: 1rem; display: flex; font-size: 1.5rem">
-                <img style="height: 1em" src="{{ asset('images/time_icon/' . $time_category->code . '.jpg') }}" alt="{{ $time_category->name }}">
-                {{ $time_category->name }}
-            </h1>
-            <hr>
-        <div class='posts'>
+            <x-slot name="header">
+        　自分の投稿
+   　　　　 </x-slot>
+        <div class='posts' style="padding: 1rem;">
             @foreach ($posts as $post)
-               <div class='post' style="padding: 1rem; margin-bottom: 1rem; border: 1px solid dimgray; display: flex;">
-                    <div style="width: 15em;">
+                <div class='post' style="padding: 1rem; margin-bottom: 1rem; border: 1px solid dimgray; display: flex;">
+                    <div style="width: 15em; overflow:auto;">
                        <img src="{{asset('storage/images/' . $post->image) }}" alt="">
                     </div>
                     <div style="flex-grow: 1">
@@ -28,7 +26,7 @@
                         <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                         <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
                         
-                 @if($post->user_id == Auth::id())
+                        @if($post->user_id == Auth::id())
                             <div style="display: flex; justify-content: end; align-items: end">
                                 <div style="margin-right: 1rem">
                                     <a href="{{route('posts.edit', ['post' => $post->id])}}">
@@ -90,5 +88,7 @@
                 }
             }
         </script>
+
+
         </x-app-layout>
     </body>
