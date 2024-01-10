@@ -7,10 +7,11 @@
     "require": {
         "php": "^8.0.2",
         "doctrine/dbal": "^3.7",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "rakuten-ws/rws-php-sdk": "^1.1"
     },
     "require-dev": {
         "askdkc/breezejp": "^1.7",

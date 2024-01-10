@@ -50,14 +50,28 @@
                                 <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
                             @endforeach
                         </select>
+                        
+                        <div class="container">
+                            <h1>hotel select</h1>
+                            <form action="{{ route('hotels.search') }}" method="GET">
+                            @csrf
+                            <div class="form-group">
+                                <label for="keyword">ホテル名</label>
+                                <input type="text" name="keyword" placeholder="ホテル名を入力してください">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">検索</button>
+                            </div>
+                            </form>
+                        </div>
+                                   
+                        
+                       
+                        
                     </div>
-                   <button class="go"><div style=" font-family: 'M PLUS 1', sans-serif;">　投稿する　</div></button>
+                   <button class="go">　投稿する　</button>
                 </form>
-                <div class="fotter">
-                    <a href="/">
-                        <button class="back"><div style="font-family: 'M PLUS 1', sans-serif;">　＜　戻る　</div></button>
-                    </a>
-                </div>
+                
             </div>
         </x-app-layout>
     </body>

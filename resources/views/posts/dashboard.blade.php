@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
     <body>
         <x-app-layout>
@@ -44,7 +45,15 @@
              
              <secion class="rsttop-othersearch__main">
                  <div class="rsttop-search__heading">
-                     <h2 class="rsttop-search__title">🍴料理🍴</h2>
+                     <h2 class="rsttop-search__title">
+                         <span class="material-symbols-outlined">
+                            restaurant_menu
+                        </span>
+                         料理
+                         <span class="material-symbols-outlined">
+                            restaurant_menu
+                        </span>
+                         </h2>
                  
                          
                  <div>
@@ -61,7 +70,15 @@
              
              <section class="rsttop-servicesearch__main">
                  <div class="rsttop-search__heading">
-                     <h2 class="rsttop-search__title">🌞状況🌜</h2>
+                     <h2 class="rsttop-search__title">
+                         <span class="material-symbols-outlined">
+                            sunny
+                        </span>
+                         状況
+                         <span class="material-symbols-outlined">
+                            bedtime
+                        </span>
+                         </h2>
                  </div>
                  <div>
                     @foreach($time_categories as $time_category)

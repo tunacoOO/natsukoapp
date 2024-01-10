@@ -19,6 +19,8 @@ class Post extends Model
     'user_id'
 ];
 
+   
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -42,6 +44,11 @@ class Post extends Model
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+    
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 }
 

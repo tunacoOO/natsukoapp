@@ -16,6 +16,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    
+    
+    'rakuten_id' => env('RAKUTEN_APPLICATION_ID', false),
+    
 
     /*
     |--------------------------------------------------------------------------
