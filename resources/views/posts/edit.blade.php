@@ -49,7 +49,7 @@
                        <button class="go"><div style=" font-family: 'M PLUS 1', sans-serif;">　保存する　</div></button>
                     </form>
                      <div class="fotter">
-                    <a href="/">
+                    <a href="route('posts.all')">
                         <button class="back">　< 戻る　</button>
                     </a>
                 </div>

@@ -39,7 +39,7 @@ Route::put('/posts/{post?}',[PostController::class,'update'])->name('posts.updat
 Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
 Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
 Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
-Route::get('/search',[ArticleController::class,'search'])->name('articles.search');
+Route::get('/hotels/search',[PostController::class,'search'])->name('hotels.search');
 Route::get('/posts/{post?}',[PostController::class,'all'])->name('posts.all');
 Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');
 Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');

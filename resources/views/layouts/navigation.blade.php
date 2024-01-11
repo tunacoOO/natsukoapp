@@ -17,7 +17,11 @@
                     </x-nav-link>
                     
                     <x-nav-link :href="route('posts.create')" :active="request()->routeIs('posts.create')">
-                        <img style="width: 90px;" src="{{ asset('images/IMG_1408.jpg') }}">
+                        <img style="width: 90px; float:right;" src="{{ asset('images/IMG_1408.jpg') }}">
+                    </x-nav-link>
+                    
+                     <x-nav-link :href="route('posts.all')" :active="request()->routeIs('posts.all')">
+                        <img style="width: 90px;" src="{{ asset('images/all.jpg') }}">
                     </x-nav-link>
                     
                     

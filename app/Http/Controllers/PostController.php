@@ -63,13 +63,15 @@ class PostController extends Controller
     }
     
     
-    public function create(Category $category,TimeCategory $time_category)
+    public function create(Category $category,TimeCategory $time_category,Request $request)
     {
         
         
         $categories = Category::get();
         $time_categories = TimeCategory::get();
         $prefs = config('pref');
+        $hotel = $request->input('hotel');
+        $request->session()->put('hotel', $hotel);
         $posts = Post::get();
         return view('posts.create',[
             'categories' => $categories,
@@ -77,6 +79,39 @@ class PostController extends Controller
             'prefs' => $prefs,
             ]);
                 
+    }
+    
+    
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        
+        $url = 'https://app.rakuten.co.jp/services/api/Travel/KeywordHotelSearch/20170426';
+         $params = [
+                    'format' => 'json',
+                    'keyword' => $keyword,
+                    'applicationId' => env('RAKUTEN_APP_ID'),
+                    ];
+        
+        $client = new \GuzzleHttp\Client();
+         
+        $response = $client->request('GET', $url,  ['Bearer' => config('services.rakuten.token')]);
+        
+        $body = $response->getBody();
+        $result = json_decode($body, true);
+
+        
+        $hotels = $result['hotels'];
+        $data = [
+                'keyword' => $keyword,
+                'hotels' => $hotels,
+                ];
+            
+        return view('posts.search',$data);
+        
+        
+          
+
     }
     
     
@@ -89,14 +124,20 @@ class PostController extends Controller
         $post = new Post();
         $input = $request['post'];
         $images = $request->file('images');
+        $hotel->
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
+        
+       
         $file = $request->file('post.images');
         $filename = $file->getClientOriginalName();
         $path = $file->storeAs('public/images',$filename);
         $post->image = $filename;
+        
+        
          $post->fill($input)->save();
         return redirect('/posts/'.$post->id);
+        
     }
     
     public function edit(Post $post,Category $category,TimeCategory $time_category)
