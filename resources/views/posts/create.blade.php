@@ -54,19 +54,11 @@
                         <div class="container">
                             <h1>hotel select</h1>
                             <form action="{{ route('hotels.search') }}" method="GET">
-                            @csrf
-                            <div class="form-group">
-                                <label for="keyword">ホテル名</label>
-                                <input type="text" name="keyword" placeholder="ホテル名を入力してください">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">検索</button>
+                                <button type="submit">ホテルを探す</button>
                             </div>
                             </form>
                         </div>
                                    
-                        
-                       
                         
                     </div>
                    <button class="go">　投稿する　</button>
