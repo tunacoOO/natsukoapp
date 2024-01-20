@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController; 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TimeCategoryController;
+use App\Http\Controllers\RakutenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,13 +40,13 @@ Route::put('/posts/{post?}',[PostController::class,'update'])->name('posts.updat
 Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
 Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
 Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
-Route::get('/hotels/search',[PostController::class,'search'])->name('hotels.search');
 Route::get('/posts/{post?}',[PostController::class,'all'])->name('posts.all');
 Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');
 Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');
 Route::post('/posts/{post}/like',[PostController::class,'like'])->name('posts.like');
 Route::delete('/posts/{post}/like',[PostController::class,'unlike'])->name('posts.unlike');
 Route::get('/posts/{post}/mine',[ProfileController::class,'show'])->name('profile.mine');
+Route::get('/search',[RakutenController::class,'search'])->name('rakuten.search');
 // Language Switcher Route 言語切替用ルートだよ
 Route::get('language/{locale}', function ($locale) {
     app()->setLocale($locale);

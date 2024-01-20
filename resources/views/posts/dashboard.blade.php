@@ -14,7 +14,19 @@
     </head>
     <body>
         <x-app-layout>
-            <form action="{{route('posts.all')}}" style="margin-top: 1rem;">
+            
+            
+                
+        <form method="GET" action="/search">
+          @csrf
+          <input id="keyword" type="text" value="" name="keyword" placeholder="ホテルキーワード">
+          <button> <span class="material-symbols-outlined">
+                    search
+                </span></button>
+        </form>
+                            
+                            
+            <form action="{{ route('posts.all') }}" style="margin-top: 1rem;">
                <select type="text" class="form-control" name="pref_id">
                         @foreach($prefs as $index => $name)
                              <option value="" hidden>都道府県▼</option>
