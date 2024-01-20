@@ -25,7 +25,7 @@
                         <p>{{ $post->prefName }}</p>
                         <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                         <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
-                        <a href="/search/{{ $post->hotelName }}">{{ $post->hotelName }}</a>
+                        <p class='hotel'>{{ $post->hotel }}</p>
                         
                         @if($post->user_id == Auth::id())
                             <div style="display: flex; justify-content: end; align-items: end">

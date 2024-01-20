@@ -16,7 +16,8 @@ class Post extends Model
     'category_id',
     'time_category_id',
     'pref_id',
-    'user_id'
+    'user_id',
+    'hotel'
 ];
 
    
