@@ -19,7 +19,7 @@
                 @csrf
                 <div class="create">
                     <div class="post_images">
-                        <input type="file" multiple="multiple" name="post[images]" value="{{ old('post.images') }}" accept="image/*" >
+                        <input type="file" multiple="multiple" name="post[image]" value="{{ old('post.images') }}" accept="image/*" >
                         <p class="images__error" style="color:red">{{ $errors->first('post.images') }}</p>
                         <img src="{{asset('storage/images/') }}" alt="">
                     </div>
@@ -50,6 +50,7 @@
                                 <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
                             @endforeach
                         </select>
+<<<<<<< HEAD
                         
                         <div class="container">
                             <h1>hotel select</h1>
@@ -60,10 +61,16 @@
                         </div>
                                    
                         
+=======
+>>>>>>> 99007a4c60094a9e3b71fe6bae353998ce2f7f8a
                     </div>
-                   <button class="go">　投稿する　</button>
-                </form>
+                    <div class="post_hotel">
+                         <input type="text" name="post[hotel]" placeholder="ホテル名"/>
+                    </div>
+                    <button class="go">　投稿する　</button>
+             </form>
+                    </div>
                 
-            </div>
+                
         </x-app-layout>
     </body>

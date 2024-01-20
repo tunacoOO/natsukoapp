@@ -11,16 +11,19 @@ use App\Models\Like;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 
 class PostController extends Controller
 {
-    public function dashboard(Category $category,TimeCategory $time_category)
+    public function dashboard(Category $category,TimeCategory $time_category,Request $request)
     {
         $categories = Category::get();
         $time_categories = TimeCategory::get();
         $prefs = config('pref');
         $posts = Post::get();
+        
+        
         return view('posts.dashboard',[
             'categories' => $categories,
             'time_categories' => $time_categories,
@@ -82,40 +85,6 @@ class PostController extends Controller
     }
     
     
-    public function search(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        
-        $url = 'https://app.rakuten.co.jp/services/api/Travel/KeywordHotelSearch/20170426';
-         $params = [
-                    'format' => 'json',
-                    'keyword' => $keyword,
-                    'applicationId' => env('RAKUTEN_APP_ID'),
-                    ];
-        
-        $client = new \GuzzleHttp\Client();
-         
-        $response = $client->request('GET', $url,  ['Bearer' => config('services.rakuten.token')]);
-        
-        $body = $response->getBody();
-        $result = json_decode($body, true);
-
-        
-        $hotels = $result['hotels'];
-        $data = [
-                'keyword' => $keyword,
-                'hotels' => $hotels,
-                ];
-            
-        return view('posts.search',$data);
-        
-        
-          
-
-    }
-    
-    
-   
     
     public function store(PostRequest $request,Post $post)
     {
@@ -124,18 +93,18 @@ class PostController extends Controller
         $post = new Post();
         $input = $request['post'];
         $images = $request->file('images');
-        $hotel->
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
-        
-       
         $file = $request->file('post.images');
+        
+        foreach($images as $image){
         $filename = $file->getClientOriginalName();
         $path = $file->storeAs('public/images',$filename);
         $post->image = $filename;
+        }
         
-        
-         $post->fill($input)->save();
+        $post->images()->saveMany($image);
+        $post->fill($input)->save();
         return redirect('/posts/'.$post->id);
         
     }
