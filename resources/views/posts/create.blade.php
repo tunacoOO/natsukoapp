@@ -4,60 +4,86 @@
         <meta charset="utf-8">
         <title>投稿作成画面</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('./css/create.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400&display=swap" rel="stylesheet">
     </head>
     <body>
         <x-app-layout>
             <x-slot name="header">
                 <div style="font-family: 'M PLUS 1', sans-serif;">投稿作成画面</div>
              </x-slot>
-            <form action="/posts" method="POST" enctype="multipart/form-data">
+             
+             <div class="container">
+             <form action="/posts" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="create">
-                    <div class="post_images">
-                        <input type="file" multiple="multiple" name="post[image]" value="{{ old('post.images') }}" accept="image/*" >
-                        <p class="images__error" style="color:red">{{ $errors->first('post.images') }}</p>
-                        <img src="{{asset('storage/images/') }}" alt="">
+                    
+                    <div class="mb-3">
+                      <label for="formFileMultiple" class="form-label">お料理の写真を選択してください</label>
+                      <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="image[]" value="{{ old('image') }}" accept="image/*">
+                      <p class="image__error" style="color:red">{{ $errors->first('image') }}</p>
                     </div>
-                    <div class="post_title">
-                         <input type="text" name="post[title]" placeholder="タイトル"/>
-                         <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+                    
+                  <div class="post_title">
+                    <div class="form-floating mb-3">
+                      <input type="text" name="post[title]" class="form-control" id="floatingInput">
+                      <label for="floatingInput">title</label>
                     </div>
-                    <div class="post_body">
-                        <textarea name="post[body]" placeholder="みんなにこれを伝えたい！">{{ old('post.body') }}</textarea>
-                        <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
-                    </div>
-                    <div class="category">
-                        <h2>
-                           <div style="font-family: 'M PLUS 1', sans-serif;">カテゴリー</div>
-                        </h2>
-                        <select type="text" class="form-control" name="pref_id" id='pref_id'>
-                              @foreach($prefs as $id => $name)
-                                 <option value="{{ $id }}" {{ old('pref_id') == $id? 'selected' : '' }}>{{ $name }}</option>
-                              @endforeach
+                    <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+                  </div>
+                  
+                  <div class="post_body">
+                    <div class="form-floating">
+                      <textarea class="form-control" name="post[body]" id="floatingTextarea2" style="height: 100px"></textarea>
+                      <label for="floatingTextarea2">Comments</label>
+                    </div> 
+                    <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                  </div>
+                  
+                  <div class="row g-3">
+                      <div class="col-sm">
+                        <select class="form-select" aria-label="Default select example" name="pref_id" id='pref_id'>
+                          <option selected>県名を選択してください</option>
+                           @foreach($prefs as $id => $name)
+                                <option value="{{ $id }}" {{ old('pref_id') == $id? 'selected' : '' }}>{{ $name }}</option>
+                            @endforeach
                         </select>
-                        <select name="post[category_id]">
+                        
+                      </div>
+                      <div class="col-sm">
+                          <select class="form-select" aria-label="Default select example" name="post[category_id]">
+                          <option selected>料理カテゴリーを選択してください</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
-                        <select name="post[time_category_id]">
+                       
+                      </div>
+                      <div class="col-sm">
+                        <select class="form-select" aria-label="Default select example"  name="post[time_category_id]">
+                          <option selected>時間・状況を選択してください</option>
                             @foreach($time_categories as $time_category)
                                 <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
                             @endforeach
                         </select>
+                      </div>
+                  </div>
+                  
+                <div class="post_hotel">
+                    <div class="form-floating mb-3">
+                      <input type="text" name="post[htoel]" class="form-control" id="floatingInput">
+                      <label for="floatingInput">hotel name</label>
                     </div>
-                    <div class="post_hotel">
-                         <input type="text" name="post[hotel]" placeholder="ホテル名"/>
-                    </div>
-                    <button class="go">　投稿する　</button>
-             </form>
-                    </div>
+                </div>
+                        
+                    
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">投稿する</button>
+                  </div>
+                </form>
                 
-                
+            </div>
         </x-app-layout>
-    </body>
+        
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> </body>

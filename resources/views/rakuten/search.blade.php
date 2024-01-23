@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>ホテル検索</title>
         <!-- Fonts -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
         <link rel="stylesheet" href="{{ asset('./css/create.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,18 +19,33 @@
                 <div style="font-family: 'M PLUS 1', sans-serif;">ホテル検索</div>
             </x-slot>
             
-        
+           <div class="container">
             @if(isset($hotels))
-            <div class='container'>
+            <div class="accordion" id="accordionExample">
                 @foreach($hotels as $hotel)
-                <div class="hotel">
-                    <p>{{ $hotel['hotelName'] }}</p>
-                    <p>{{ $hotel['address1'] }}</p>
-                    <p>{{ $hotel['address2'] }}</p>
-                    <a href="{{ $hotel['hotelInformationUrl'] }}">ホテル情報</a>
-                </div>
-                @endforeach
-            </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        {{ $hotel['hotelName'] }}
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <strong>{{ $hotel['address1'] }} {{ $hotel['address2'] }}</strong> 
+                        <a href="{{ $hotel['hotelInformationUrl'] }}">ホテルurl</a>
+                        </div>
+                    </div>
+                  </div>
+                
+                 @endforeach
+                 </div>
+            
             @endif
+            </div>
+            
         </x-app-layout>
+        
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        
     </body>

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\TimeCategory;
 use App\Models\Like;
+use App\Models\Image;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +34,9 @@ class PostController extends Controller
     
     }
     
-    public function all(Request $request,Post $post){
+    public function all(Request $request,Post $post,Image $image){
         $post = new Post;
+        $image = new Image;
 
         // カテゴリーで絞り込み
         if($request->input('category_id')){
@@ -59,9 +61,11 @@ class PostController extends Controller
         }
 
         $posts = $post->get();
+        $images = $image->get();
 
         return view('posts.all',[
-            'posts' => $post ->get()
+            'posts' => $post->get(),
+            'images' => $image->get()
         ]);
     }
     
@@ -73,9 +77,9 @@ class PostController extends Controller
         $categories = Category::get();
         $time_categories = TimeCategory::get();
         $prefs = config('pref');
-        $hotel = $request->input('hotel');
-        $request->session()->put('hotel', $hotel);
         $posts = Post::get();
+        $images = Image::get();
+        
         return view('posts.create',[
             'categories' => $categories,
             'time_categories' => $time_categories,
@@ -86,24 +90,25 @@ class PostController extends Controller
     
     
     
-    public function store(PostRequest $request,Post $post)
+    public function store(PostRequest $request,Post $post,Image $image)
     {
         $userId = Auth::id();
         
         $post = new Post();
+        $image = new Image();
+        
         $input = $request['post'];
-        $images = $request->file('images');
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
-        $file = $request->file('post.images');
         
-        foreach($images as $image){
-        $filename = $file->getClientOriginalName();
-        $path = $file->storeAs('public/images',$filename);
-        $post->image = $filename;
-        }
-        
-        $post->images()->saveMany($image);
+         $images = $request->file('image');
+         
+         foreach($images as $image){
+         $file_path = $image->store('public');
+         Session::put('image_path', str_replace('public', 'storage', $file_path));
+         }
+         
+        $post->fill($input)->saveMany($image);
         $post->fill($input)->save();
         return redirect('/posts/'.$post->id);
         
@@ -124,14 +129,16 @@ class PostController extends Controller
     public function update(PostRequest $request, Post $post)
     {
         $input_post = $request['post'];
-        $images = $request->file('images');
+        $images = $request->file('image');
+        
+        foreach($images as $image){
+        $file_path = $image->store('public');
+        Session::put('image_path', str_replace('public', 'storage', $file_path));
+        }
+        
+        $post->images()->saveMany($image);
         $post->fill($input_post)->save();
-         $post->pref_id  = $request->input('pref_id');
-        $file = $request->file('post.images');
-        $filename = $file->getClientOriginalName();
-        $path = $file->storeAs('public/images',$filename);
-        $post->image = $filename;
-         $post->fill($input_post)->save();
+        
         return redirect('/posts/' . $post->id);
     }
     
