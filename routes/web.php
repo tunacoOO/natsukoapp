@@ -38,7 +38,6 @@ Route::post('/posts', [PostController::class, 'store']);
 Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
 Route::put('/posts/{post?}',[PostController::class,'update'])->name('posts.update');
 Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
-Route::post('/posts/{post}',[PostController::class,'imagePost'])->name('image.post');
 Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
 Route::get('/posts/{post?}',[PostController::class,'all'])->name('posts.all');
 Route::get('/categories/{category}',[CategoryController::class,'show'])->name('category.show');

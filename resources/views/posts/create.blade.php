@@ -75,28 +75,19 @@
                     <div class="form-floating mb-3">
                       <input type="text" name="post[htoel]" class="form-control" id="floatingInput">
                       <label for="floatingInput">hotel name</label>
-
-                        
-                        <div class="container">
-                            <h1>hotel select</h1>
-                            <form action="{{ route('hotels.search') }}" method="GET">
-                                <button type="submit">ホテルを探す</button>
-                            </div>
-                            </form>
-                        </div>
+                    </div>
                                    
                         
 
                     </div>
-                </div>
+                
                         
                     
                   <div class="col-12">
                     <button type="submit" class="btn btn-primary">投稿する</button>
                   </div>
                 </form>
-                
-            </div>
+              </div> 
         </x-app-layout>
         
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> </body>

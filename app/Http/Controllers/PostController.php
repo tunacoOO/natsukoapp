@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
 
 
+
 class PostController extends Controller
 {
     public function dashboard(Category $category,TimeCategory $time_category,Request $request)
@@ -108,7 +109,7 @@ class PostController extends Controller
          Session::put('image_path', str_replace('public', 'storage', $file_path));
          }
          
-        $post->fill($input)->saveMany($image);
+        $image->fill($input)->saveMany($image);
         $post->fill($input)->save();
         return redirect('/posts/'.$post->id);
         
