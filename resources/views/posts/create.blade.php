@@ -67,6 +67,7 @@
                                 <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
                             @endforeach
                         </select>
+
                       </div>
                   </div>
                   
@@ -74,6 +75,18 @@
                     <div class="form-floating mb-3">
                       <input type="text" name="post[htoel]" class="form-control" id="floatingInput">
                       <label for="floatingInput">hotel name</label>
+
+                        
+                        <div class="container">
+                            <h1>hotel select</h1>
+                            <form action="{{ route('hotels.search') }}" method="GET">
+                                <button type="submit">ホテルを探す</button>
+                            </div>
+                            </form>
+                        </div>
+                                   
+                        
+
                     </div>
                 </div>
                         
