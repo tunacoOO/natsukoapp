@@ -4,19 +4,18 @@
         <meta charset="utf-8">
         <title>ホカるん</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('./css/dashboard.css') }}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     </head>
-    <body>
+    <body style="background-color: #FFFFEE;">
         <x-app-layout>
             
             
-                
+        <div class="container">      
         <form method="GET" action="/search">
           @csrf
           <input id="keyword" type="text" value="" name="keyword" placeholder="ホテルキーワード">
@@ -27,7 +26,7 @@
                             
                             
             <form action="{{ route('posts.all') }}" style="margin-top: 1rem;">
-               <select type="text" class="form-control" name="pref_id">
+               <select type="text" name="pref_id">
                         @foreach($prefs as $index => $name)
                              <option value="" hidden>都道府県▼</option>
                              <option value="{{ $index }}">{{ $name }}</option>
@@ -103,6 +102,9 @@
                 </div>
                  
              </secion>
+             </div>
          </x-app-layout>
+         
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     </body>
 </html>

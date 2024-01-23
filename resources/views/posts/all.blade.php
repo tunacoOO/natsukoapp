@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>ホカるん</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     </head>
@@ -13,71 +13,100 @@
             <x-slot name="header">
         　ホテルご飯投稿一覧
    　　　　 </x-slot>
-        <div class='posts' style="padding: 1rem;">
-            @foreach ($posts as $post)
-                <div class='post' style="padding: 1rem; margin-bottom: 1rem; border: 1px solid dimgray; display: flex;">
-                    <div style="width: 15em; overflow:auto;">
-                       <img src="{{asset('storage/images/' . $post->image) }}" alt="">
-                    </div>
-                    <div style="flex-grow: 1">
-                        <p class='title'>{{ $post->title }}</p>
-                        <p class='body'>{{ $post->body }}</p>
-                        <p>{{ $post->prefName }}</p>
-                        <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
-                        <a href="/time_categories/{{ $post->time_category->id }}">{{ $post->time_category->name }}</a>
-                        <p class='hotel'>{{ $post->hotel }}</p>
+        <div class="container">
+            <div class="row">
+                @foreach ($posts as $post)
+                <div class="col-sm-4">
+                    <div class="card">
                         
-                        @if($post->user_id == Auth::id())
-                            <div style="display: flex; justify-content: end; align-items: end">
-                                <div style="margin-right: 1rem">
-                                    <a href="{{route('posts.edit', ['post' => $post->id])}}">
-                                        <button class="edit">
+                      
+                        <div id="carouselExampleIndicators" class="carousel slide">
+                          <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                          </div>
+                          <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img src="{{asset(session('image_path')) }}" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{{asset(session('image_path')) }}" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                              <img src="{{asset(session('image_path')) }}" class="d-block w-100" alt="">
+                            </div>
+                          </div>
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                          </button>
+                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                          </button>
+                        </div>
+                    
+                          <div class="card-body">
+                            <p class="card-title">{{ $post->prefName }}</p>
+                            <p class='card-title'>{{ $post->hotel }}</p>
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                            <p class="card-text">{{ $post->body }}</p>
+                            <a href="/categories/{{ $post->category->id }}" class="card-title">{{ $post->category->name }}</a>
+                            <a href="/time_categories/{{ $post->time_category->id }}" class="card-title">{{ $post->time_category->name }}</a>
+                            
+                            @if($post->user_id == Auth::id())
+                                <div style="display: flex; justify-content: end; align-items: end">
+                                    <div style="margin-right: 1rem">
+                                        <a href="{{route('posts.edit', ['post' => $post->id])}}">
+                                            <button class="edit">
+                                                <span class="material-symbols-outlined">
+                                                    edit
+                                                </span>
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="delete" onclick="deletePost({{ $post->id }})">
                                             <span class="material-symbols-outlined">
-                                                edit
+                                                delete
                                             </span>
                                         </button>
-                                    </a>
+                                    </form>
                                 </div>
-                                <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                            @endif
+                            <div style="text-align: right; color: red;">
+                                <small style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</small>
+                            </div>
+                            
+                            <div style="text-align: right;">
+                            @if($post->likes->contains('user_id',auth()->id()))
+                                <form action="{{ route('posts.unlike',$post )}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="delete" onclick="deletePost({{ $post->id }})">
-                                        <span class="material-symbols-outlined">
-                                            delete
+                                    <button type="submit">
+                                        <span class="material-symbols-outlined" style="color:red;">
+                                            favorite
                                         </span>
                                     </button>
                                 </form>
+                            @else
+                                <form action="{{ route('posts.like',$post) }}" method="POST">
+                                    @csrf
+                                    <button type="submit">
+                                        <span class="material-symbols-outlined">
+                                            favorite
+                                        </span>
+                                    </button>
+                                </form>
+                            @endif
+                            <p>{{ $post->likes->count() }}</p>
                             </div>
-                        @endif
-                        <div style="text-align: right; color: red;">
-                            <small style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</small>
                         </div>
-                        
-                        <div style="text-align: right;">
-                        @if($post->likes->contains('user_id',auth()->id()))
-                            <form action="{{ route('posts.unlike',$post )}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit">
-                                    <span class="material-symbols-outlined" style="color:red;">
-                                        favorite
-                                    </span>
-                                </button>
-                            </form>
-                        @else
-                            <form action="{{ route('posts.like',$post) }}" method="POST">
-                                @csrf
-                                <button type="submit">
-                                    <span class="material-symbols-outlined">
-                                        favorite
-                                    </span>
-                                </button>
-                            </form>
-                        @endif
-                        <p>{{ $post->likes->count() }}</p>
-                        </div>
-                    </div>
                 </div>
+            </div>
             @endforeach
         </div>
         <script>
@@ -90,6 +119,10 @@
             }
         </script>
 
-
+        </div>
         </x-app-layout>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </body>

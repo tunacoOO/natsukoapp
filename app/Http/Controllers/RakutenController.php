@@ -36,7 +36,6 @@ class RakutenController extends Controller
                 //入力パラメーターはバーコード
                 'keyword' => $request->input('keyword'),
                 'hits' => '5',
-                'responseType' => 'small'
                 
             ));
 
