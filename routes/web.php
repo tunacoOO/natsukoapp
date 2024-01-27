@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TimeCategoryController;
 use App\Http\Controllers\RakutenController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -45,7 +46,7 @@ Route::get('/categories/{category}',[CategoryController::class,'show'])->name('c
 Route::get('/time_categories/{time_category}',[TimeCategoryController::class,'time'])->name('category.time');
 Route::post('/posts/{post}/like',[PostController::class,'like'])->name('posts.like');
 Route::delete('/posts/{post}/like',[PostController::class,'unlike'])->name('posts.unlike');
-Route::get('/posts/{post}/mine',[ProfileController::class,'show'])->name('profile.mine');
+Route::get('/users/{user}',[UserController::class,'show'])->name('posts.user');
 Route::get('/search',[RakutenController::class,'search'])->name('rakuten.search');
 // Language Switcher Route 言語切替用ルートだよ
 Route::get('language/{locale}', function ($locale) {

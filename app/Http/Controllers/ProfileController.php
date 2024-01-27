@@ -59,13 +59,5 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
     
-    public function show(Request $request)
-    {
-        $posts = $request->user()->posts()->latest()->get();
-        return view('profile.mine',[
-            'user' => $request->user(),
-            'posts' => $posts,
-            ]);
-    }
-
+    
 }
