@@ -25,9 +25,7 @@
                 </div>
             </div>
             
-            <div class="mine">
-                 <a href="{{route('profile.mine', ['post' => $post->id])}}">toukou</a>
-            </div>
+            
         </div>
     </div>
 </x-app-layout>

@@ -11,7 +11,7 @@
     <body>
         <x-app-layout>
             <x-slot name="header">
-        　ホテルご飯投稿一覧
+                {{ $user->name }}の投稿
    　　　　 </x-slot>
         <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -75,7 +75,7 @@
                                 </div>
                             @endif
                             <div style="text-align: right; color: red;">
-                                <a href="/users/{{ $post->user->id }}" style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</a>
+                                <small style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</small>
                             </div>
                             
                             <div style="text-align: right;">
