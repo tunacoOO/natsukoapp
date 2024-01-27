@@ -11,7 +11,6 @@ class Post extends Model
     use HasFactory;
     protected $fillable = [
     'title',
-    'image',
     'body',
     'category_id',
     'time_category_id',
@@ -50,6 +49,13 @@ class Post extends Model
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+    
+    public static function booted(): void
+    {
+        static::deleted(function ($post) {
+            $posts->images()->delete();
+        });
     }
 }
 
