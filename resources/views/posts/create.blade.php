@@ -21,7 +21,7 @@
                     
                     <div class="mb-3">
                       <label for="formFileMultiple" class="form-label">お料理の写真を選択してください</label>
-                      <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="image[]" value="{{ old('image') }}" accept="image/*">
+                      <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="images[]" value="{{ old('image') }}" accept="image/*">
                       <p class="image__error" style="color:red">{{ $errors->first('image') }}</p>
                     </div>
                     
@@ -73,20 +73,11 @@
                   
                 <div class="post_hotel">
                     <div class="form-floating mb-3">
-                      <input type="text" name="post[htoel]" class="form-control" id="floatingInput">
+                      <input type="text" name="post[hotel]" class="form-control" id="floatingInput">
                       <label for="floatingInput">hotel name</label>
+                      <p class="body__error" style="color:red">{{ $errors->first('post.hotel') }}</p>
 
                         
-                        <div class="container">
-                            <h1>hotel select</h1>
-                            <form action="{{ route('hotels.search') }}" method="GET">
-                                <button type="submit">ホテルを探す</button>
-                            </div>
-                            </form>
-                        </div>
-                                   
-                        
-
                     </div>
                 </div>
                         
