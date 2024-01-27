@@ -75,16 +75,10 @@
                     <div class="form-floating mb-3">
                       <input type="text" name="post[hotel]" class="form-control" id="floatingInput">
                       <label for="floatingInput">hotel name</label>
-<<<<<<< HEAD
                     </div>
                                    
                         
 
-=======
-                      <p class="body__error" style="color:red">{{ $errors->first('post.hotel') }}</p>
-
-                        
->>>>>>> d09823b2c39ce919436ba02e9001ab3b74cf1517
                     </div>
                 
                         
