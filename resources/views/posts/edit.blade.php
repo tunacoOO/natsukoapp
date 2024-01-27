@@ -22,7 +22,7 @@
                 　<div class="mb-3">
                     <div class='post_images'>
                       <label for="formFileMultiple" class="form-label">投稿する写真をすべて選択してください</label>
-                      <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="image[]" value="{{ old('image') }}" accept="image/*">
+                      <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="images[]" value="{{ old('image') }}" accept="image/*">
                       <img src="{{asset(session('image_path')) }}" alt="" style="width: 25%;"> 
                      </div>
                 　</div>

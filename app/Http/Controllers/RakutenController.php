@@ -52,7 +52,7 @@ class RakutenController extends Controller
                 }
             }
             else {
-            echo 'Error:'.$response->getMessage();
+            echo '該当するホテルがありません'.$response->getMessage();
             }
 
             return view('rakuten.search')->with(['hotels' => $hotels]);

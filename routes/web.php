@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TimeCategoryController;
 use App\Http\Controllers\RakutenController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

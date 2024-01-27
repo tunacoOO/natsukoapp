@@ -10,9 +10,9 @@ use App\Models\TimeCategory;
 use App\Models\Like;
 use App\Models\Image;
 use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -37,8 +37,7 @@ class PostController extends Controller
     
     public function all(Request $request,Post $post,Image $image){
         $post = new Post;
-        $image = new Image;
-
+        $posts = Post::with('images')->get();
         // カテゴリーで絞り込み
         if($request->input('category_id')){
             $post = $post->where('category_id', $request->input('category_id'));
@@ -96,26 +95,27 @@ class PostController extends Controller
         $userId = Auth::id();
         
         $post = new Post();
-        $image = new Image();
-        
         $input = $request['post'];
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
         
-         $images = $request->file('image');
-         
-         foreach($images as $image){
-         $file_path = $image->store('public');
-         Session::put('image_path', str_replace('public', 'storage', $file_path));
-         }
-         
-        $image->fill($input)->saveMany($image);
-        $post->fill($input)->save();
+        
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('public/images');
+                $image = new Image();
+                $image->path = str_replace('public', 'storage', $path);
+                $image->post_id = $post->id; 
+                $image->save();
+            }
+        }
+        
+        
         return redirect('/posts/'.$post->id);
         
     }
     
-    public function edit(Post $post,Category $category,TimeCategory $time_category)
+    public function edit(Post $post,Category $category,TimeCategory $time_category,Image $image)
     {
         $prefs = config('pref');
         
@@ -124,27 +124,31 @@ class PostController extends Controller
             'categories' => $category->get(),
             'time_categories' => $time_category->get(),
             'prefs' => $prefs,
+            'images' => $image->get()
             ]);
     }
     
-    public function update(PostRequest $request, Post $post)
+    public function update(PostRequest $request, Post $post,Image $image)
     {
         $input_post = $request['post'];
-        $images = $request->file('image');
+        $post->fill($input_post)->save();
+        
         
         foreach($images as $image){
-        $file_path = $image->store('public');
-        Session::put('image_path', str_replace('public', 'storage', $file_path));
+        $input_image = $request['images'];
         }
+        $image->fill($input_image)->save();
         
-        $post->images()->saveMany($image);
-        $post->fill($input_post)->save();
         
         return redirect('/posts/' . $post->id);
     }
     
-    public function delete(Post $post)
+    public function delete(Post $post,Image $image)
         {
+            if($image->path){
+                Storage::disk('public')->delete('images/'.$image->path);
+            }
+            
             $post->delete();
             return redirect('/posts/');
         }
