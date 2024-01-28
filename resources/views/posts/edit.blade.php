@@ -5,7 +5,6 @@
         <title>投稿作成画面</title>
         <!-- Fonts -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('./css/create.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     </head>
@@ -15,15 +14,14 @@
                 <div style="font-family: 'M PLUS 1', sans-serif;">投稿編集画面</div>
              </x-slot>
              
-             <div class="container">
-             <form action="/posts/{{ $post->id }}" method="POST" enctype="multipart/form-data">
+             
+             <form action="{{ route('posts.store',['post' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')   
+                <div class="container">
                 　<div class="mb-3">
                     <div class='post_images'>
-                      <label for="formFileMultiple" class="form-label">投稿する写真をすべて選択してください</label>
+                      <label for="formFileMultiple" class="form-label">追加する写真を選択してください</label>
                       <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="images[]" value="{{ old('image') }}" accept="image/*">
-                      <img src="{{asset(session('image_path')) }}" alt="" style="width: 25%;"> 
                      </div>
                 　</div>
                     
@@ -31,13 +29,15 @@
                     <div class="form-floating mb-3">
                       <input type="text" name="post[title]" class="form-control" id="floatingInput" value="{{ $post->title }}">
                       <label for="floatingInput">title</label>
+                      <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                     </div>
                   </div>
                   
                   <div class="post_body">
                     <div class="form-floating">
-                      <textarea class="form-control" name="post[body]" id="floatingTextarea2" style="height: 100px">>{{ $post->body }}</textarea>
+                      <textarea class="form-control" name="post[body]" id="floatingTextarea2" style="height: 100px">{{ $post->body }}</textarea>
                       <label for="floatingTextarea2">Comments</label>
+                      <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                     </div> 
                   </div>
                   
@@ -69,8 +69,9 @@
                   
                  <div class="post_hotel">
                     <div class="form-floating mb-3">
-                      <input type="text" name="post[htoel]" class="form-control" id="floatingInput" value="{{ $post->hotel }}">
+                      <input type="text" name="post[hotel]" class="form-control" id="floatingInput" value="{{ $post->hotel }}">
                       <label for="floatingInput">hotel name</label>
+                      <p class="body__error" style="color:red">{{ $errors->first('post.hotel') }}</p>
                     </div>
                  </div>
                         
@@ -78,9 +79,8 @@
                   <div class="col-12">
                     <button type="submit" class="btn btn-primary">更新する</button>
                   </div>
-                </form>
-                
-            </div>
+                </div>
+            </form>
         </x-app-layout>
         
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> </body>

@@ -16,7 +16,7 @@
             
             
         <div class="container">      
-        <form method="GET" action="/search">
+        <form method="GET" action="{{ route('rakuten.search') }}">
           @csrf
           <input id="keyword" type="text" value="" name="keyword" placeholder="ホテルキーワード">
           <button> <span class="material-symbols-outlined">

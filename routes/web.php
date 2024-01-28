@@ -36,9 +36,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [PostController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
-Route::post('/posts', [PostController::class, 'store']);
+Route::post('/posts/store/{post?}', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
-Route::put('/posts/{post?}',[PostController::class,'update'])->name('posts.update');
 Route::delete('/posts/{post}',[PostController::class,'delete'])->name('posts.delete');
 Route::get('/posts/search',[PostController::class,'show'])->name('category.search');
 Route::get('/posts/{post?}',[PostController::class,'all'])->name('posts.all');
