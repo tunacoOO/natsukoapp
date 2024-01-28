@@ -5,7 +5,6 @@
         <title>投稿作成画面</title>
         <!-- Fonts -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('./css/create.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     </head>
@@ -15,10 +14,10 @@
                 <div style="font-family: 'M PLUS 1', sans-serif;">投稿作成画面</div>
              </x-slot>
              
-             <div class="container">
-             <form action="/posts" method="POST" enctype="multipart/form-data">
+             
+             <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                    
+                <div class="container">
                     <div class="mb-3">
                       <label for="formFileMultiple" class="form-label">お料理の写真を選択してください</label>
                       <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="images[]" value="{{ old('image') }}" accept="image/*">
@@ -85,9 +84,8 @@
                   <div class="col-12">
                     <button type="submit" class="btn btn-primary">投稿する</button>
                   </div>
-                </form>
-                
-            </div>
+                </div>
+              </form>
         </x-app-layout>
         
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> </body>

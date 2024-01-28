@@ -51,12 +51,7 @@ class Post extends Model
         return $this->hasMany(Image::class);
     }
     
-    public static function booted(): void
-    {
-        static::deleted(function ($post) {
-            $posts->images()->delete();
-        });
-    }
+    
 }
 
 

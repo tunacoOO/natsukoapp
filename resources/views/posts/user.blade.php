@@ -6,7 +6,6 @@
         <!-- Fonts -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <link rel="stylesheet" href="{{ asset('css/all.css') }}">
     </head>
     <body>
         <x-app-layout>
@@ -19,29 +18,32 @@
                 <div class="col">
                     <div class="card h-100 border-secondary mb-3">
                         
-                       @foreach($post->images as $image)
-                        <div id="carouselExampleIndicators" class="carousel slide">
+                        <div id="carousel{{ $post->id }}" class="carousel slide">
+                            
                           <div class="carousel-inner">
-                            <div class="carousel-item active">
-                              <img src="{{asset($image->path) }}" class="d-block w-100" alt="">
-                            </div>
-                            <div class="carousel-item">
-                              <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
-                            </div>
-                            <div class="carousel-item">
-                              <img src="{{asset($image->path) }}" class="d-block w-100" alt="">
-                            </div>
+                            @foreach($post->images as $image)
+                                @if($loop -> first)
+                                    <div class="carousel-item active">
+                                    <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                    </div>
+                                @else
+                                    <div class="carousel-item">
+                                      <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                    </div>
+                                @endif
+                            @endforeach
+                            
                           </div>
-                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ $post->id }}" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                           </button>
-                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ $post->id }}" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                           </button>
                         </div>
-                        @endforeach
+                        
                     
                           <div class="card-body">
                             <p class="card-title">{{ $post->prefName }}</p>
@@ -63,7 +65,7 @@
                                             </button>
                                         </a>
                                     </div>
-                                    <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                    <form action="{{ route('posts.delete',['post' => $post->id])}}" id="form_{{ $post->id }}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="button" class="delete" onclick="deletePost({{ $post->id }})">
@@ -75,7 +77,7 @@
                                 </div>
                             @endif
                             <div style="text-align: right; color: red;">
-                                <small style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</small>
+                                <a href="/users/{{ $post->user->id }}" style="margin-left: 2rem;">{{is_null($post->user) ? '': $post->user->name}}</a>
                             </div>
                             
                             <div style="text-align: right;">

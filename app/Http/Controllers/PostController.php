@@ -89,11 +89,16 @@ class PostController extends Controller
     
     
     
-    public function store(PostRequest $request,Post $post,Image $image)
+    public function store(PostRequest $request,Post $post = null,Image $image)
     {
         $userId = Auth::id();
         
+        if(is_null($post)){
         $post = new Post();
+        }else{
+            $posts = $post;
+        }
+        
         $input = $request['post'];
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
@@ -115,7 +120,7 @@ class PostController extends Controller
         
     }
     
-    public function edit(Post $post,Category $category,TimeCategory $time_category,Image $image)
+    public function edit(Post $post,Category $category,TimeCategory $time_category)
     {
         $prefs = config('pref');
         
@@ -124,24 +129,10 @@ class PostController extends Controller
             'categories' => $category->get(),
             'time_categories' => $time_category->get(),
             'prefs' => $prefs,
-            'images' => $image->get()
             ]);
     }
     
-    public function update(PostRequest $request, Post $post,Image $image)
-    {
-        $input_post = $request['post'];
-        $post->fill($input_post)->save();
-        
-        
-        foreach($images as $image){
-        $input_image = $request['images'];
-        }
-        $image->fill($input_image)->save();
-        
-        
-        return redirect('/posts/' . $post->id);
-    }
+    
     
     public function delete(Post $post,Image $image)
         {
@@ -150,7 +141,7 @@ class PostController extends Controller
             }
             
             $post->delete();
-            return redirect('/posts/');
+            return redirect('/posts');
         }
         
     public function like(Post $post)
