@@ -20,20 +20,20 @@
                         
                         <div id="carousel{{ $post->id }}" class="carousel slide">
                             
-                          <div class="carousel-inner">
+                          <div class="carousel-inner img-thumbnail">
                             @foreach($post->images as $image)
                                 @if($loop -> first)
                                     <div class="carousel-item active">
-                                    <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                    <img src="{{asset($image->path)}}" class="d-block w-100"  style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @else
                                     <div class="carousel-item">
-                                      <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                      <img src="{{asset($image->path)}}" class="d-block w-100" style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @endif
                             @endforeach
-                            
                           </div>
+                          
                           <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ $post->id }}" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
