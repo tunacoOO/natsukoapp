@@ -15,6 +15,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 
 
+
 class PostController extends Controller
 {
     public function dashboard(Category $category,TimeCategory $time_category,Request $request)
@@ -102,7 +103,6 @@ class PostController extends Controller
         $input = $request['post'];
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
-        $post->fill($input)->save();
         
         
         if ($request->hasFile('images')) {
