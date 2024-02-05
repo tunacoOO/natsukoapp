@@ -22,26 +22,30 @@
            <div class="container">
             <div class="row">
                 @if(isset($hotels))
-                @foreach($hotels as $hotel)
-                <div class="accordion" id="accordionExample">
-                   
-                    <div class="col">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            {{ $hotel['hotelName'] }}
-                          </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                          <div class="accordion-body">
-                            <strong>{{ $hotel['address1'] }} {{ $hotel['address2'] }}</strong> 
-                            <a href="{{ $hotel['hotelInformationUrl'] }}">ホテルurl</a>
-                          </div>
+                    @forelse($hotels as $hotel)
+                    <div class="accordion" id="accordionExample">
+                       
+                        <div class="col">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $hotel['hotelNo'] }}" aria-expanded="true" aria-controls="collapseOne">
+                                {{ $hotel['hotelName'] }}
+                              </button>
+                            </h2>
+                            <div id="collapse{{ $hotel['hotelNo'] }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                <strong>{{ $hotel['address1'] }} {{ $hotel['address2'] }}</strong> 
+                                <a href="{{ $hotel['hotelInformationUrl'] }}">ホテルurl</a>
+                              </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                </div>
-                 @endforeach
+                    @empty
+                    <p>aaaaa</p>
+                    </div>
+                     @endforelse
+                @else
+                <p>sssss</p>
                  @endif
             </div>
             

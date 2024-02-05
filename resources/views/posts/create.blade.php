@@ -21,13 +21,12 @@
                     <div class="mb-3">
                       <label for="formFileMultiple" class="form-label">お料理の写真を選択してください</label>
                       <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="images[]" value="{{ old('image') }}" accept="image/*">
-                      <p class="image__error" style="color:red">{{ $errors->first('image') }}</p>
                     </div>
                     
                   <div class="post_title">
                     <div class="form-floating mb-3">
                       <input type="text" name="post[title]" class="form-control" id="floatingInput">
-                      <label for="floatingInput">title</label>
+                      <label for="floatingInput">1番美味しかったお料理</label>
                     </div>
                     <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                   </div>
@@ -35,7 +34,7 @@
                   <div class="post_body">
                     <div class="form-floating">
                       <textarea class="form-control" name="post[body]" id="floatingTextarea2" style="height: 100px"></textarea>
-                      <label for="floatingTextarea2">Comments</label>
+                      <label for="floatingTextarea2">レビュー</label>
                     </div> 
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                   </div>
@@ -73,7 +72,10 @@
                 <div class="post_hotel">
                     <div class="form-floating mb-3">
                       <input type="text" name="post[hotel]" class="form-control" id="floatingInput">
-                      <label for="floatingInput">hotel name</label>
+                      <label for="floatingInput">ホテル名</label>
+                      <class="form-text">
+                        正確なホテル名を記入してください。
+                      </class>
                       <p class="body__error" style="color:red">{{ $errors->first('post.hotel') }}</p>
 
                         
@@ -82,7 +84,7 @@
                         
                     
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary">投稿する</button>
+                    <button type="submit" class="btn btn-outline-primary">投稿</button>
                   </div>
                 </div>
               </form>

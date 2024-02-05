@@ -77,7 +77,7 @@
                         
                     
                   <div class="col-12">
-                    <button type="submit" class="btn btn-primary">更新する</button>
+                    <button type="submit" class="btn btn-outline-primary">更新</button>
                   </div>
                 </div>
             </form>
