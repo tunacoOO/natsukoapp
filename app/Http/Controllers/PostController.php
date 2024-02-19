@@ -103,6 +103,7 @@ class PostController extends Controller
         $input = $request['post'];
         $post->pref_id  = $request->input('pref_id');
         $post->user_id = Auth::id();
+        $post->fill($input)->save();
         
         
         if ($request->hasFile('images')) {

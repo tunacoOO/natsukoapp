@@ -28,7 +28,7 @@
                   <div class="post_title">
                     <div class="form-floating mb-3">
                       <input type="text" name="post[title]" class="form-control" id="floatingInput" value="{{ $post->title }}">
-                      <label for="floatingInput">title</label>
+                      <label for="floatingInput">1番美味しかったお料理</label>
                       <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                     </div>
                   </div>
@@ -36,30 +36,30 @@
                   <div class="post_body">
                     <div class="form-floating">
                       <textarea class="form-control" name="post[body]" id="floatingTextarea2" style="height: 100px">{{ $post->body }}</textarea>
-                      <label for="floatingTextarea2">Comments</label>
+                      <label for="floatingTextarea2">レビュー</label>
                       <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                     </div> 
                   </div>
                   
                   <div class="row g-3">
-                      <div class="col-sm">
-                        <select class="form-select" aria-label="Default select example" name="pref_id" id='pref_id'>
+                      <div class="col-auto">
+                        <select class="form-select" aria-label="Default select example" name="pref_id" id='pref_id' style="margin: 20px 0;">
                             @foreach($prefs as $id => $name)
                                  <option value="{{ $id }}" {{ old('pref_id') == $id? 'selected' : '' }}>{{ $name }}</option>
                             @endforeach
                         </select>
                         
                       </div>
-                      <div class="col-sm">
-                          <select class="form-select" aria-label="Default select example" name="post[category_id]">
+                      <div class="col-auto">
+                          <select class="form-select" aria-label="Default select example" name="post[category_id]" style="margin: 20px 0;">
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                        
                       </div>
-                      <div class="col-sm">
-                        <select class="form-select" aria-label="Default select example"  name="post[time_category_id]">
+                      <div class="col-auto">
+                        <select class="form-select" aria-label="Default select example"  name="post[time_category_id]" style="margin: 20px 0;">
                             @foreach($time_categories as $time_category)
                                 <option value="{{ $time_category->id }}">{{ $time_category->name }}</option>
                             @endforeach
@@ -70,7 +70,7 @@
                  <div class="post_hotel">
                     <div class="form-floating mb-3">
                       <input type="text" name="post[hotel]" class="form-control" id="floatingInput" value="{{ $post->hotel }}">
-                      <label for="floatingInput">hotel name</label>
+                      <label for="floatingInput">ホテル名</label>
                       <p class="body__error" style="color:red">{{ $errors->first('post.hotel') }}</p>
                     </div>
                  </div>
