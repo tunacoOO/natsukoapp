@@ -40,7 +40,7 @@ class RakutenController extends Controller
             ));
 
             if ($response->isOk()) {
-                #dd($response);
+                
                 $hotels = array();
                 foreach ($response as $hotel) {
                     $hotels[] = array(
@@ -53,6 +53,7 @@ class RakutenController extends Controller
                         'hotelSpecial' => $hotel[0]['hotelBasicInfo']['hotelSpecial'],
                         'access' => $hotel[0]['hotelBasicInfo']['access']
                         );
+                        //dd($response);
                 }
             }
             else {

@@ -21,17 +21,18 @@
                     <div class="mb-3">
                       <label for="formFileMultiple" class="form-label">お料理の写真を選択してください</label>
                       <input class="form-control" type="file" id="formFileMultiple" multiple="multiple" name="images[]" value="{{ old('image') }}" accept="image/*">
-                      <p class="image__error" style="color:red">{{ $errors->first('image') }}</p>
                     </div>
-                    
+ 
                     <div class="post_title">
                       <div class="form-floating mb-3">
                         <input type="text" name="post[title]" class="form-control" id="floatingInput">
                         <label for="floatingInput">1番美味しかったお料理</label>
                       </div>
                       <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
+
                     </div>
                   
+
                     <div class="post_body">
                       <div class="form-floating">
                         <textarea class="form-control" name="post[body]" id="floatingTextarea2" style="height: 100px"></textarea>
@@ -39,6 +40,7 @@
                       </div> 
                       <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                     </div>
+
                   
                     <div class="row g-3">
                         <div class="col-auto">
@@ -49,6 +51,7 @@
                               @endforeach
                           </select>
                         
+
                         </div>
                         <div class="col-auto">
                             <select class="form-select" aria-label="Default select example" name="post[category_id]" style="margin: 20px 0;">
@@ -58,6 +61,7 @@
                               @endforeach
                           </select>
                         </div>
+
                         
                         <div class="col-auto">
                           <select class="form-select" aria-label="Default select example"  name="post[time_category_id]" style="margin: 20px 0;">

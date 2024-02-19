@@ -15,6 +15,7 @@
                 <div style="font-family: 'M PLUS 1', sans-serif;">ホテル検索</div>
             </x-slot>
             
+
             <div class="container">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     @if(isset($hotels))
@@ -40,6 +41,7 @@
                         @endforeach
                      @endif
                 </div>
+
             </div>
             
         </x-app-layout>

@@ -24,6 +24,7 @@
                             @foreach($post->images as $image)
                                 @if($loop -> first)
                                     <div class="carousel-item active">
+
                                         <img src="{{asset($image->path)}}" class="d-block w-100" alt="" style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @else
