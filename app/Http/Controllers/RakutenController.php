@@ -44,10 +44,14 @@ class RakutenController extends Controller
                 $hotels = array();
                 foreach ($response as $hotel) {
                     $hotels[] = array(
+                        'hotelNo' => $hotel[0]['hotelBasicInfo']['hotelNo'],
                         'hotelName' => $hotel[0]['hotelBasicInfo']['hotelName'],
                         'address1' => $hotel[0]['hotelBasicInfo']['address1'],
                         'address2' => $hotel[0]['hotelBasicInfo']['address2'],
                         'hotelInformationUrl' => $hotel[0]['hotelBasicInfo']['hotelInformationUrl'],
+                        'hotelImageUrl' => $hotel[0]['hotelBasicInfo']['hotelImageUrl'],
+                        'hotelSpecial' => $hotel[0]['hotelBasicInfo']['hotelSpecial'],
+                        'access' => $hotel[0]['hotelBasicInfo']['access']
                         );
                 }
             }

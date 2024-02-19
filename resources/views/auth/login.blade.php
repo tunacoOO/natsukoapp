@@ -44,4 +44,9 @@
             </x-primary-button>
         </div>
     </form>
+    
+    <x-primary-button class="ml-3">
+        <a href="{{ route('register') }}">新規会員登録する</a>
+    </x-primary-button>
+        
 </x-guest-layout>

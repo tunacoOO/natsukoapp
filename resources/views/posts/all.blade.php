@@ -24,11 +24,11 @@
                             @foreach($post->images as $image)
                                 @if($loop -> first)
                                     <div class="carousel-item active">
-                                    <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                        <img src="{{asset($image->path)}}" class="d-block w-100" alt="" style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @else
                                     <div class="carousel-item">
-                                      <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                        <img src="{{asset($image->path)}}" class="d-block w-100" alt="" style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @endif
                             @endforeach
@@ -104,19 +104,19 @@
                             <p>{{ $post->likes->count() }}</p>
                             </div>
                         </div>
+                    </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
-        </div>
-        <script>
-            function deletePost(id) {
-                'use strict'
-        
-                if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
-                    document.getElementById(`form_${id}`).submit();
+            <script>
+                function deletePost(id) {
+                    'use strict'
+            
+                    if (confirm('削除すると復元できません。\n本当に削除しますか？')) {
+                        document.getElementById(`form_${id}`).submit();
+                    }
                 }
-            }
-        </script>
+            </script>
 
         </div>
         </x-app-layout>
