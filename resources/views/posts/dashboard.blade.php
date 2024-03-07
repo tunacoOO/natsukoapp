@@ -18,11 +18,23 @@
         <div class="container">      
         <form method="GET" action="{{ route('rakuten.search') }}">
           @csrf
-          <input id="keyword" type="text" value="" name="keyword" placeholder="ホテルキーワード">
+          <input id="keyword" type="text" value="" name="keyword" placeholder="ホテルキーワード" required>
           <button> <span class="material-symbols-outlined">
                     search
                 </span></button>
         </form>
+        <div id="error-message" style="display: none;">このフィールドを入力してください。</div>
+        
+        <script>
+            function validateSearch() {
+                var keyword = document.getElementById('keyword').value;
+                if (keyword.trim() === '') {
+                    document.getElementById('error-message').style.display = 'block';
+                    return false;
+                }
+                return true;
+            }
+        </script>
                             
                             
             <form action="{{ route('posts.all') }}" style="margin-top: 1rem;">
