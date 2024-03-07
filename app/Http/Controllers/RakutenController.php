@@ -35,7 +35,7 @@ class RakutenController extends Controller
             $response = $client->execute('TravelKeywordHotelSearch', array(
                 //入力パラメーターはバーコード
                 'keyword' => $request->input('keyword'),
-                'hits' => '5',
+                'hits' => '6',
                 
             ));
 
@@ -57,7 +57,7 @@ class RakutenController extends Controller
                 }
             }
             else {
-            echo '該当するホテルがありません'.$response->getMessage();
+            return '該当するホテルがありません。';
             }
 
             return view('rakuten.search')->with(['hotels' => $hotels]);

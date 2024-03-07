@@ -24,11 +24,11 @@
                             @foreach($post->images as $image)
                                 @if($loop -> first)
                                     <div class="carousel-item active">
-                                    <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                    <img src="{{asset($image->path)}}" class="d-block w-100" style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @else
                                     <div class="carousel-item">
-                                      <img src="{{asset($image->path)}}" class="d-block w-100" alt="">
+                                      <img src="{{asset($image->path)}}" class="d-block w-100" style="width: 100%; height: 350px; object-fit: contain;" alt="">
                                     </div>
                                 @endif
                             @endforeach
@@ -45,13 +45,38 @@
                         </div>
                         
                     
-                          <div class="card-body">
-                            <p class="card-title">{{ $post->prefName }}</p>
-                            <p class='card-title'>{{ $post->hotel }}</p>
-                            <h5 class="card-title">{{ $post->title }}</h5>
-                            <p class="card-text">{{ $post->body }}</p>
-                            <a href="/categories/{{ $post->category->id }}" class="card-title">{{ $post->category->name }}</a>
-                            <a href="/time_categories/{{ $post->time_category->id }}" class="card-title">{{ $post->time_category->name }}</a>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    <span class="material-symbols-outlined">
+                                        location_on
+                                    </span>
+                                    {{ $post->prefName }}
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="material-symbols-outlined">
+                                        hotel
+                                    </span>
+                                    {{  $post->hotel }}
+                                </li>
+                                <li class="list-group-item">{{  $post->body }}</li>
+                                <li class="list-group-item">
+                                    <a href="/categories/{{ $post->category->id }}">
+                                        <span class="material-symbols-outlined">
+                                            restaurant_menu
+                                        </span>
+                                        {{ $post->category->name }}
+                                    </a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="/time_categories/{{ $post->time_category->id }}">
+                                        <span class="material-symbols-outlined">
+                                            timelapse
+                                        </span>
+                                        {{ $post->time_category->name }}
+                                    </a>
+                                </li>
+                            </ul>
                             
                             
                             @if($post->user_id == Auth::id())
